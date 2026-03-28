@@ -187,7 +187,6 @@ const startApolloServer = async () => {
         },
     }));
 
-    // --- ДОДАНО: Налаштування Socket.io ---
     const httpServer = createServer(app);
     const io = new Server(httpServer, {
         cors: {
@@ -200,7 +199,6 @@ const startApolloServer = async () => {
         console.log('Новий користувач підключився до чату');
         
         socket.on('chatMessage', (msg) => {
-            // Розсилаємо повідомлення всім підключеним клієнтам
             io.emit('chatMessage', msg);
         });
 
@@ -209,7 +207,6 @@ const startApolloServer = async () => {
         });
     });
 
-    // ДОДАНО: Використовуємо httpServer замість app для прослуховування порту
     httpServer.listen(PORT, () => {
         console.log(`REST API та Socket.io сервер успішно запущено на порту ${PORT}`);
         console.log(`GraphQL доступний за адресою http://localhost:${PORT}/graphql`);
