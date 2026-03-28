@@ -31,7 +31,7 @@
 
 ### 1. Клонування репозиторію
 Схиліть проєкт на свій комп'ютер:
-`git clone <ваше-посилання-на-github-репозиторій>`
+`git clone https://github.com/VladyslavKoval999/event-system.git`
 
 ### 2. Налаштування Backend
 Перейдіть у папку бекенду та встановіть необхідні залежності:
@@ -39,10 +39,9 @@
 `npm install`
 
 Створіть файл `.env` у корені папки `Lab4` та додайте наступні змінні оточення:
+`MONGO_URI=mongodb+srv://koval671219_db_user:Jm18tqfqW8QxYARz@cluster0.5t6vfbf.mongodb.net/?appName=Cluster0`
+`DB_NAME=lab4_events_db`
 `PORT=3000`
-`MONGO_URI=ваше_посилання_на_кластер_mongodb`
-`DB_NAME=events_db`
-`SESSION_SECRET=секретний_ключ_для_сесій_12345`
 
 Запустіть сервер:
 `npm start`
