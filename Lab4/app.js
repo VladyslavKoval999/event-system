@@ -24,7 +24,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:5173", "https://event-system-psi.vercel.app"],
+    credentials: true
+}));
 app.use(express.json());
 
 app.use(session({
@@ -190,7 +193,7 @@ const startApolloServer = async () => {
     const httpServer = createServer(app);
     const io = new Server(httpServer, {
         cors: {
-            origin: ["http://localhost:5173", "https://event-system-psi.vercel.app/"],
+            origin: ["http://localhost:5173", "https://event-system-psi.vercel.app"],
             credentials: true
         }
     });
