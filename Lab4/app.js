@@ -51,6 +51,22 @@ app.use((req, res, next) => {
 });
 
 app.use('/auth', authRoutes);
+app.get('/seed-test', async (req, res) => {
+    try {
+        const newEvent = new Event({
+            title: "Успішний деплой проєкту",
+            description: "Фінальна перевірка роботи бази даних та фронтенду на Vercel.",
+            date: new Date("2026-04-10T10:00:00.000Z"),
+            organizer: "Влад Коваль",
+            creator: new mongoose.Types.ObjectId() 
+        });
+        await newEvent.save();
+        res.json({ message: "Успіх! Подію додано в базу даних.", event: newEvent });
+    } catch (error) {
+        console.error("Помилка додавання тестової події:", error);
+        res.status(500).json({ error: error.message });
+    }
+});
 
 app.get('/events', async (req, res) => {
     try {
@@ -191,6 +207,7 @@ const startApolloServer = async () => {
     }));
 
     const httpServer = createServer(app);
+    
     const io = new Server(httpServer, {
         cors: {
             origin: ["http://localhost:5173", "https://event-system-psi.vercel.app"],
